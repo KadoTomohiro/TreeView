@@ -1,0 +1,14 @@
+<p>
+  <ng-container *ngIf="!node.isLeaf">
+    <button class="treeShow" (click)="show()" *ngIf="!isShown">+</button>
+    <button class="treeShow" (click)="hide()" *ngIf="isShown">-</button>
+  </ng-container>
+  {{node.name}}
+  <input type="text" name="newNode" [(ngModel)]="newNodeName" (keyup.enter)="addNode()">
+  <button (click)="remove()">-</button>
+</p>
+<ul *ngIf="isShown">
+  <li *ngFor="let childNode of node.nodes">
+    <app-tree-node [node]="childNode" (removeNode)="onRemoveNode($event)"></app-tree-node>
+  </li>
+</ul>
